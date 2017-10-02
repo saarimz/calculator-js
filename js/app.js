@@ -55,10 +55,6 @@
         className: 'btn-item',
 
         template: _.template($('#btn-template').html()),
-        
-        initialize: function(){
-            this.render();
-        },
 
         render: function(){
             let self = this;
@@ -66,4 +62,25 @@
             return self;
         }
     });
+
+    let ButtonsView = Backbone.View.extend({
+        tagName: 'div',
+        el: '.btn-container',
+
+        initialize: function(){
+            
+        },
+
+        onButtonClicked: function(button){
+            console.log("Button clicked!");
+        },
+        render: function(){
+            var self = this;
+            this.model.each(function(button){
+                let buttonView = new ButtonView({model: button});
+                self.$el.append(buttonView.render().$el)
+            });
+            return self;
+        }
+    })
 
